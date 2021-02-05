@@ -1,0 +1,593 @@
+<?php
+
+// Date CTF
+$ctf_annee = '2020';
+$ctf_mois = '07';
+$ctf_mois_alp = 'JUL';
+$ctf_jour = '19';
+$ctf_heure = '02';
+$ctf_minute = '02';
+$ctf_sec = '00';
+
+$DateFinCtf = $ctf_mois_alp . " " . $ctf_jour . ", " . $ctf_annee . " " . $ctf_heure . ":" . $ctf_minute . ":" . $ctf_sec;
+
+//Nombre de membres
+$nbrMembre = '16';
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$langue = "";
+
+?>
+<!--
+Dernière modification : 21.10.2020
+
+Carte du monde : https://github.com/StephanWagner/svgMap
+Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/master/LICENSE
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Erotium Primus</title>
+
+    <meta name="description" content="Equipe privée de cybersécurité Erotium Primus"/>
+    <meta property="og:title" content="Erotium Primus">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="google.css">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
+</head>
+<body>
+<div class="home">
+
+    <!-- Barre suprérieure (insta, FB, ...) -->
+    <div id="barre_haut">
+
+        <!-- Icon Facebook -->
+        <a href="https://www.facebook.com/Erotium-Primus-105059924616653/"><img id="icon_facebook"
+                                                                                src="img/facebook.svg" alt="Facebook"/></a>
+
+        <!-- Icon Instagramm -->
+        <a href="https://www.instagram.com/erotiumprimus/"><img id="icon_instagramm" src="img/instagram.svg"
+                                                                alt="instagram"/></a>
+
+        <!-- Interrupteur -->
+        <div id="interrupteur">
+            <p class="btnperso" id="web">
+                FR
+            </p>  
+            <label class="switch" for="mycheck">
+                <input type="checkbox" id="mycheck">
+                <span class="slider round"></span>
+            </label>  
+            <p class="btnperso" id="serv">
+                EN
+            </p>
+        </div>
+
+    </div>
+    <div class="intro">
+        <div class="fondParticules">
+
+            <?php
+            // Pas de message d'echec ou de réussite si le formulaire n'a pas encore été envoyé
+            if (!isset($_POST['texteEchecReussite'])) {
+                $_POST['texteEchecReussite'] = "";
+            }
+
+            // Gère la marge haut (margin-top) du message de succes et d'échec
+            if (!isset($_POST['marginTopReponse'])) {
+                $_POST['marginTopReponse'] = "200px";
+            }
+
+            ?>
+
+            <!-- Formulaire -->
+            <div class="instructions" style="visibility: hidden">
+                <div id="cacher">
+                    <p style="text-align: start;color:white;"><strong>Instructions</strong></p>
+                    <p style="text-align: start;color:red;">00110100 00110001 00100000 00110110 00110100 00100000
+                        00110110 01100100 00100000 00110110 01100011 00100000 00110110 01100110 00100000 00110110
+                        00110011 00100000 00110110 00110001 00100000 00110110 01100011 00100000 00110011 00110001</p>
+                    <div class="mainForm">
+                        <form action="<?php echo htmlspecialchars('code.php'); ?>" method="post">
+                            <label id="secretCode">Code déchiffré :<input class="fondCode" type="password"
+                                                                          name="code"/></label>
+                            <div class="Div_btnValiderForms">
+                                <input class="bouttonValider" type="submit" name="bntValider" value="Valider"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- MESSAGE ECHEC / REUSSITE-->
+                <div class="Div_conteneurTexteEchecReussite"
+                     style="margin-top: <?php print($_POST['marginTopReponse']) ?>">
+                    <h3 class="conteneurTexteEchecReussite"><?php print($_POST['texteEchecReussite']) ?></h3>
+                </div>
+            </div>
+
+            <!-- LOGO -->
+            <img id="mainImage" alt="logo du site d'Erotium Primus" src="img/logo.gif" onclick="this.src = this.src"
+                 width="300"/>
+
+            <h1 id="titreEP">Erotium Primus</h1>
+            <p id="equipeWhiteHatAxee">Équipe WhiteHat axée cybersécurité</p>
+
+            <!-- PREMIER BOUTON REJOINDRE -->
+            <span><a class="btnRejoindre"
+                     onclick="instructions.style.visibility = 'visible';instructions.style.height= 'auto';mainImage.src = 'img/logoRouge.gif'"
+                     href="#">Rejoindre le Discord</a></span>
+
+            <!-- GIF fleche vers le bas sur l'accueil -->
+            <a href="#about"><img alt="fleche vers le bas" src="img/arrow.gif"
+                                  style="padding-top:5px; padding-bottom: 10px" width="50"/></a>
+        </div>
+    </div>
+
+    <!-- SECTION A PROPOS -->
+    <div class="w3-container section-release" style="padding:40px 16px" id="about">
+        <h1 class="w3-center" id="aProposDeEquipe">A PROPOS DE L'ÉQUIPE</h1>
+        <div class="divAPropos" style="margin-left: auto;margin-right:auto">
+            <p id="aProposContent" style="text-align: left;padding: 0 30px;">
+                Erotium Primus est une équipe de pratiquants en cybersécurité.<br>
+                Elle est constituée à ce jour de <?php echo $nbrMembre ?> membres actifs.<br>
+                De l'apprentissage jusqu'au master, l'équipe est ouverte à tout type de profils.<br>
+                Aucune activité illégale n'est tolérée au sein de l'équipe.
+            </p>
+        </div>
+        <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div id="firstDivPropos">
+                <div class="w3-quarter">
+                    <img alt="horloge" src="img/horloge.svg" style="padding: 20px 0 0 0" width="90"/>
+                    <p class="w3-large" id="titreCtfRegulier"><strong>CTF réguliers</strong></p>
+                    <p id="contentCtfRegulier">Participez régulièrement à des CTF avec toutes la team. Initiez-vous à de
+                        nouveaux types d'attaques et perfectionnez vos connaissances dans d'autres.</p>
+                </div>
+                <div class="w3-quarter">
+                    <img alt="horloge" src="img/nouvContact.svg" style="padding: 20px 0 0 0" width="90"/>
+                    <p class="w3-large" id="titreNouvContacts"><strong>Nouveaux contacts</strong></p>
+                    <p id="contentNouvContacts">Faites de nouvelles conaissances avec des exepérimentés dans le
+                        domaine.</p>
+                </div>
+            </div>
+            <div id="secondDivPropos">
+                <div class="w3-quarter">
+                    <img alt="horloge" src="img/study.svg" style="padding: 20px 0 0 0" width="90"/>
+                    <p class="w3-large" id="titreAideEtudes"><strong>Aide pour les études</strong></p>
+                    <p id="contentAideEtudes">Pas compris quelque chose en Java, PHP, Python, Ruby, ... ? Besoin d'aide
+                        pour
+                        tester la sécurité de votre application / site Web ? Les autres membres vous aideront
+                        volontiers.</p>
+                </div>
+                <div class="w3-quarter">
+                    <img alt="horloge" src="img/grade.svg" style="padding: 20px 0 0 0" width="70"/>
+                    <p class="w3-large" id="titreTousLesNiv"><strong>Pour tous les niveaux</strong></p>
+                    <p id="contentTousLesNiv">L'équipe est consitutée de membres étudiants à l'Université, en Haute
+                        Ecole
+                        Spécialisée, au Lycée et en apprentissage. Peut importe votre niveau, il ne sera jamais trop
+                        éloigné
+                        de celui des autres membres. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION CONDITIONS -->
+    <div class="section conditions">
+        <h2 id="titreConditions">Condition pour rejoindre</h2>
+
+        <div><h3 id="titreImperatives">Imperatives</h3>
+            <ul>
+                <li id="cdtL1">Avoir au minumum 16 ans (les demandes des 18 - 40 ans auront priorités)<br></li>
+                <li id="cdtL2">Être en étude ou avoir terminé des études dans l'informatique (formation en école ou à
+                    l'armée) OU être un excellent auto-didacte<br></li>
+                <li id="cdtL3">Être motivé à améliorer ses connaissances dans les failles de sécurités et les différents
+                    types d'attaques.<br></li>
+                <li id="cdtL4">Parler correctement le français et rester respectueux<br></li>
+            </ul>
+
+            <div><h3 id="titreRecommande">Recommandées</h3>
+                <ul>
+                    <li id="rcmL1">Avoir déjà réalisé des challenges ou des CTF<br></li>
+                    <li id="rcmL2">Être familiarisé avec les outils d'exploitation de failles (Kali Linux, Metasploit,
+                        ...)<br></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION FAQ -->
+    <div class="section qestionsFrequentes">
+        <h2>Questions fréquentes</h2>
+        <div><p id="Q1">
+                <strong>
+                    Q: Je suis en étude d'informatique mais je n'y connais rien en termes de cybersécurité. Je peux
+                    rejoindre la Team ?
+                </strong><br/>
+                R: Oui, les expérimentés font des challenges en compagnie d'autre experimentés et les débutants
+                se font aider par les intermédiaires et experimentés.
+            </p>
+            <p id="Q2">
+                <strong>Q: Je ne suis pas en étude et je n'ai jamais fais d'études en informatique, puis-je rejoindre
+                    ?</strong><br/>
+                R: Uniquement si vous avez niveau irréprochable dans le domaine de l'informatique ou si vous allez
+                commencer tant tôt votre formation dans le secteur.
+            </p>
+            <p id="Q3">
+                <strong>
+                    Q: J'ai un bachelor / master en informatique, est-ce que je suis trop gradé pour ce club ?
+                </strong><br/>
+                R: Nous possèdons aussi des membres qui étudient en Université et en Haute Ecole Spécialisée. Vous
+                trouverez des membres partageant votre niveau sans trop de difficultés.
+            </p>
+            <p id="Q4">
+                <strong>Q: Je n'ai pas encore 16 ans, puis-je rejoindre ?</strong>
+                <br/>R: Non. Le manque de connaissance et surtout de sérieux des moins de 16 ans pose problème. Désolé.
+            </p>
+            <p id="Q5">
+                <strong>Q: Est-ce 100 % gratuit ?</strong>
+                <br/>R: Oui. L'acces au serveur sera toujours gratuit.
+            </p>
+            <p id="Q6">
+                <strong>Q: L'équipe n'utilise t'elle que Discord comme moyen de communication ?</strong>
+                <br/>R: Oui. (D'autre projet sont en cours de discussion).
+            </p>
+            <p id="Q7_p1">
+                <strong>Q: Quels profils de membres possèdez-vous actuellement ?</strong>
+                <br/>R: Etudiants en informatique : <br>
+            </p>
+            <ul id="Q7_ul">
+                <li> Université</li>
+                <li> Haute Ecole Spécialisée</li>
+                <li> Lycée</li>
+                <li> Apprentissage</li>
+            </ul>
+            <p id="Q7_p2">
+                <br/>L'équipe est composée de membres provenant de 3 continents différents.
+                <br/>Nos membres sont agés entre 16 et 28 ans.
+                <br/>Tout cela assure une grande diversification des connaissances.
+            </p>
+            <br>
+
+            <!-- DEUXIEME BOUTON REJOINDRE -->
+            <p style="text-align: center;"><a
+                        class="btnRejoindre"
+                        onclick="instructions.style.visibility = 'visible';instructions.style.height= 'auto';mainImage.src = 'img/logoRouge.gif'"
+                        href="#">Rejoindre le Discord</a></p></div>
+    </div>
+
+    <!-- SECTION CARTE DU MONDE -->
+    <script src="map/dist/svgMap.min.js"></script>
+    <link href="map/dist/svgMap.min.css" rel="stylesheet"/>
+    <div class="section carteDuMonde">
+        <h2 id="membresViennentDe">Nos membres viennent de...</h2>
+        <div class="carteDuMonde" id="svgMap">
+            <script>
+                new svgMap({
+                    minZoom: 1,
+                    maxZoom: 10,
+                    mouseWheelZoomEnabled: false,
+                    noDataText: 'Pas encore de membre d\'ici !',
+                    colorMax: '#7878ff',
+                    colorMin: '#7878ff',
+                    targetElementID: 'svgMap',
+                    data: {
+                        data: {
+                            gdp: {
+                                name: 'Nombre de membres :',
+                                format: '{0}',
+                                thousandSeparator: ',',
+                                thresholdMax: 50000,
+                                thresholdMin: 1000
+                            }
+                        },
+                        applyData: 'gdp',
+                        values: {
+                            CH: {gdp: 7},
+                            FR: {gdp: 6},
+                            CD: {gdp: 1},
+                            HT: {gdp: 1},
+                            CA: {gdp: 1}
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- SECTION TIMER -->
+    <div class="section secTimer">
+        <div class="section secTimer" style="text-align: center">
+            <h2 id="nextCTF">Prochain CTF</h2>
+            <h1 id="demo"></h1>
+            <p id="heureSuisse"></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section footer">
+        <div class="piedDePage">
+            <p>&copy; 2020 Erotium Primus</p>
+            <p id="partenariat">Contact pour partenariat : pro$erotium-primus,com ($ -> @) (, -> .)</p>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTs DECLARATION BOUTONS -->
+<script>
+    let btnRejoindreHaut = document.getElementsByClassName('btnRejoindre')[0];
+    let btnRejoindreBas = document.getElementsByClassName('btnRejoindre')[1];
+</script>
+
+<!-- SCRIPT TIMER -->
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date('<?php echo $DateFinCtf ?>').getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+        if (document.getElementById("mycheck").checked) {
+            document.getElementById("heureSuisse").innerHTML = "(Swiss hour) <br> <br><a rel='noopener' href='https://icalendrier.fr/outils/conversion-fuseaux?startDate=<?php echo $ctf_annee . '-' . $ctf_mois . '-' . $ctf_jour ?>&hours=<?php echo $ctf_heure ?>&minutes=<?php echo $ctf_minute ?>&baseTimezone=Europe%2FZurich' target='_blank'>Calculer le décalage horaire</a> <br> (Once arrived on the page change only the city of the target time zone, the rest has already been pre-filled)";
+        } else {
+            document.getElementById("heureSuisse").innerHTML = "(Heure Suisse) <br> <br><a rel='noopener' href='https://icalendrier.fr/outils/conversion-fuseaux?startDate=<?php echo $ctf_annee . '-' . $ctf_mois . '-' . $ctf_jour ?>&hours=<?php echo $ctf_heure ?>&minutes=<?php echo $ctf_minute ?>&baseTimezone=Europe%2FZurich' target='_blank'>Calculer le décalage horaire</a> <br> (une fois arrivé sur la page ne changez que la ville du fuseau horaire cible, le reste à déjà été prérempli)";
+        }
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "j " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            if (document.getElementById("mycheck").checked) {
+                document.getElementById("demo").innerHTML = "To plan";
+            } else {
+                document.getElementById("demo").innerHTML = "À planifier";
+            }
+            document.getElementById("demo").style.color = "white";
+            document.getElementById("heureSuisse").innerText = "";
+        }
+
+    }, 1000);
+</script>
+
+<!-- SCRIPT INTERRUPTEUR -->
+<script>
+
+    // Get the checkbox
+    let checkBox = document.getElementById("mycheck");
+    let FR = document.getElementById("web");
+    let EN = document.getElementById("serv");
+
+    FR.style.color = "#7878ff";
+    EN.style.color = "white";
+
+    // Déclaration de tous les textes
+
+    // region Section à propos
+    let secretCode = document.getElementById('secretCode'); // phrase -> Code secret :
+    let titreEP = document.getElementById('titreEP'); // Gros titre sur la page d'accueil
+    let equipeWhiteHatAxee = document.getElementById('equipeWhiteHatAxee'); // phrase -> Équipe WhiteHat axée cybersecurité
+    let aProposDeEquipe = document.getElementById('aProposDeEquipe'); // phrase -> A PROPOS DE L'ÉQUIPE
+    let aProposContent = document.getElementById('aProposContent'); // contenu de la section à propos
+    let titreCtfRegulier = document.getElementById('titreCtfRegulier'); // titre section a propos -> CTF Réguliers
+    let contentCtfRegulier = document.getElementById('contentCtfRegulier'); // contenu de la section CTF réguliers
+    let titreNouvContacts = document.getElementById('titreNouvContacts'); // titre section a propos -> nouveaux contacts
+    let contentNouvContacts = document.getElementById('contentNouvContacts'); // contenu de la section -> nouveaux contacts
+    let titreAideEtudes = document.getElementById('titreAideEtudes'); // titre sectio à propos -> aide pour les études
+    let contentAideEtudes = document.getElementById('contentAideEtudes'); // contenu de la section -> aide pour les études
+    let titreTousLesNiv = document.getElementById('titreTousLesNiv'); // titre section à propos -> pour tous les niveaux
+    let contentTousLesNiv = document.getElementById('contentTousLesNiv'); // contenu section -> tous les niveaux
+
+    let joinDiscord = document.getElementsByClassName('btnRejoindre')[0]; // Premier BTN pour joindere le Discord
+    let joinDiscord2 = document.getElementsByClassName('btnRejoindre')[1]; // Deuxième BTN pour joindere le Discord
+
+    let titreConditions = document.getElementById('titreConditions'); // titre "conditions pour rejoindre"
+    let titreImperatives = document.getElementById('titreImperatives'); // titre section conditions -> Imperatives
+    let titreRecommande = document.getElementById('titreRecommande'); // titre section conditions -> Recommande
+    let liCdtL1 = document.getElementById('cdtL1');
+    let liCdtL2 = document.getElementById('cdtL2');
+    let liCdtL3 = document.getElementById('cdtL3');
+    let liCdtL4 = document.getElementById('cdtL4');
+    let liRcmdL1 = document.getElementById('rcmL1');
+    let liRcmdL2 = document.getElementById('rcmL2');
+    let nextCTF = document.getElementById('nextCTF');
+    let partenariat = document.getElementById('partenariat');
+    let membreOrigine = document.getElementById('membresViennentDe');
+    let btnSubmit = document.getElementsByClassName('bouttonValider')[0];
+    // endregion
+
+    //region FAQ
+    let question1 = document.getElementById('Q1');
+    let question2 = document.getElementById('Q2');
+    let question3 = document.getElementById('Q3');
+    let question4 = document.getElementById('Q4');
+    let question5 = document.getElementById('Q5');
+    let question6 = document.getElementById('Q6');
+    let question7p1 = document.getElementById('Q7_p1');
+    let question7p2 = document.getElementById('Q7_p2');
+    let question7ul = document.getElementById('Q7_ul');
+    //endregion
+
+    let event = new Event('click');
+    document.getElementById('mycheck').addEventListener("click", switchbtn);
+
+    let rb = document.getElementById('interrupteur');
+
+    function switchbtn() {
+
+        // On passe en anglais
+        if (checkBox.checked) {
+            FR.style.color = "white";
+            EN.style.color = "#7878ff"
+            langue = "en";
+            toEnglish();
+        }
+
+        // On passe en français
+        else {
+            FR.style.color = "#7878ff";
+            EN.style.color = "white";
+            langue = "fr";
+            toFrench();
+        }
+    }
+
+    function toEnglish() {
+        secretCode.innerHTML = 'Secret code : <input class="fondCode" type="password" name="code"/>';
+        //titreEP.innerText = 'Erotium Primus';
+        equipeWhiteHatAxee.innerText = 'WhiteHat Cyber Security Team';
+        aProposDeEquipe.innerText = 'About the Team';
+        aProposContent.innerHTML = 'Erotium Primus is a team of beginners and intermediates in cybersecurity. <br> It currently has <?php echo $nbrMembre ?> active members. <br> From apprenticeship to master\'s degree, the team is open to all types of profiles. <br> No illegal activity is tolerated within the team.';
+        titreCtfRegulier.innerText = 'Regular CTF';
+        contentCtfRegulier.innerText = 'Regularly participate in CTFs with all the team. Introduce yourself to new types of attacks and hone your knowledge in others.';
+        titreNouvContacts.innerText = 'New contacts';
+        contentNouvContacts.innerText = 'Meet new people with experience in the field.';
+        titreAideEtudes.innerText = 'Help with studies';
+        contentAideEtudes.innerText = 'Not understood something in Java, PHP, Python, Ruby, ...? Need help testing the security of your app / website? The other members will gladly help you.';
+        titreTousLesNiv.innerText = 'For all levels';
+        contentTousLesNiv.innerText = 'The team is made up of student members at the University, High Specialized Schools, Lyceum and apprenticeship. No matter what your level is, it will never be too far from that of the other members.';
+        joinDiscord.innerText = 'Join the Discord';
+        joinDiscord2.innerText = 'Join the Discord';
+        titreConditions.innerText = 'Requirements to join';
+        titreImperatives.innerText = 'Mandatory';
+        titreRecommande.innerText = 'Recommended';
+        liCdtL1.innerText = 'Be between 16 and 40 years old';
+        liCdtL2.innerText = 'Be in study or have completed studies in computer science (training in school or in the army) OR be an excellent self-taught';
+        liCdtL3.innerText = 'Be motivated to improve your knowledge of security breaches and the different types of attacks.';
+        liCdtL4.innerText = 'Speak French or English correctly and remain respectful';
+        liRcmdL1.innerText = 'Have already completed challenges or CTFs';
+        liRcmdL2.innerText = 'Be familiar with the vulnerability exploitation tools (Kali Linux, Metasploit, ...)';
+        nextCTF.innerText = 'Next CTF';
+        partenariat.innerText = 'Contact for partnership: pro$erotium-primus,com ($ -> @) (, -> .)';
+        membreOrigine.innerText = 'Our members come from...';
+        question1.innerHTML = '<strong> Q: I\'m studying computer science but I don\'t know anything about cybersecurity. Can I join the team? </strong><br/>A: Yes, experienced people challenge each other and beginners get help from the intermediaries and experienced people.';
+        question2.innerHTML = '<strong> Q: I\'m not studying and I never studied computer science, can I join? </strong><br/>A: Only if you have a flawless level in the field of computer science or if you are going to start your training in the sector so early.';
+        question3.innerHTML = '<strong> Q: I have a Bachelor\'s/Master\'s degree in Computer Science, am I too high-ranking for this club? </strong><br/>A: We also have members studying at universities and High Schools. You\'ll find members sharing your level without too much difficulty.';
+        question4.innerHTML = '<strong> Q: I\'m not 16 yet, can I join? </strong><br/>A: No. The lack of knowledge and especially of seriousness of the under 16s is a problem. Sorry.';
+        question5.innerHTML = '<strong> Q: Is it 100% free ? </strong><br/>A: Yes, it is. Access to the server will always be free.';
+        question6.innerHTML = '<strong> Q: Does the team only use Discord as a means of communication ? </strong><br/>A: Yes. (Other projects are under discussion).';
+        question7p1.innerHTML = '<strong>Q: What member profiles do you currently own ?</strong> <br/>R: Computer science students : <br>';
+        question7p2.innerHTML = '<br/> The team is composed of members from 3 different continents. <br/>Our members are between 16 and 28 years old. <br/>All this ensures a great diversification of knowledge.';
+        question7ul.innerHTML = '<li> University </li> <li> High School </li> <li> Apprenticeship </li>';
+        if (!document.getElementById("heureSuisse")) {
+            document.getElementById("heureSuisse").innerHTML = "(Swiss Hour) <br> <br><a href='https://icalendrier.fr/outils/conversion-fuseaux?startDate=<?php echo $ctf_annee . '-' . $ctf_mois . '-' . $ctf_jour ?>&hours=<?php echo $ctf_heure ?>&minutes=<?php echo $ctf_minute ?>&baseTimezone=Europe%2FZurich' target='_blank'>Calculate the time difference</a> <br> (Once arrived on the page, change only the city of the target time zone, the rest has already been pre-filled)";
+        } else {
+            document.getElementById("demo").innerHTML = "To plan";
+        }
+        btnSubmit.value = 'Submit ';
+    }
+
+    function toFrench() {
+        secretCode.innerHTML = 'Code déchiffré : <input class="fondCode" type="password" name="code"/>';
+        //titreEP.innerText = 'Erotium Primus';
+        equipeWhiteHatAxee.innerText = 'Équipe WhiteHat axée cybersecurité';
+        aProposDeEquipe.innerText = 'A PROPOS DE L\'ÉQUIPE';
+        aProposContent.innerHTML = 'Erotium Primus est une équipe de pratiquants en cybersécurité.<br>Elle est constituée à ce jour de <?php echo $nbrMembre ?> membres actifs.<br>De l\'apprentissage jusqu\'au master, l\'équipe est ouverte à tout type de profils.<br> Aucune activité illégale n\'est tolérée au sein de l\'équipe.';
+        titreCtfRegulier.innerText = 'CTF réguliers';
+        contentCtfRegulier.innerText = 'Participez régulièrement à des CTF avec toutes la team. Initiez-vous à de nouveaux types d\'attques et perfectionnez vos connaissances dans d\'autres.';
+        titreNouvContacts.innerText = 'Nouveaux contacts';
+        contentNouvContacts.innerText = 'Faites de nouvelles conaissances avec des exepérimentés dans le domaine.';
+        titreAideEtudes.innerText = 'Aide pour les études';
+        contentAideEtudes.innerText = 'Pas compris quelque chose en Java, PHP, Python, Ruby, ... ? Besoin d\'aide pour tester la sécurité de votre application / site Web ? Les autres membres vous aideront volontiers.';
+        titreTousLesNiv.innerText = 'Pour tous les niveaux';
+        contentTousLesNiv.innerText = 'L\'équipe est consitutée de membres étudiants à l\'Université, en Haute Ecole Spécialisée, au Lycée et en apprentissage. Peut importe votre niveau, il ne sera jamais trop éloigné de celui des autres membres.';
+        joinDiscord.innerText = 'Rejoindre le Discord';
+        joinDiscord2.innerText = 'Rejoindre le Discord';
+        titreConditions.innerText = 'Condition pour rejoindre';
+        titreImperatives.innerText = 'Imperatives';
+        titreRecommande.innerText = 'Recommandées';
+        liCdtL1.innerText = 'Avoir au minumum 16 ans (les demandes des 18 - 40 ans auront priorités)';
+        liCdtL2.innerText = 'Être en étude ou avoir terminé des études dans l\'informatique (formation en école ou à l\'armée) OU être un excellent auto-didacte';
+        liCdtL3.innerText = 'Être motivé à améliorer ses connaissances dans les failles de sécurités et les différents types d\'attaques.';
+        liCdtL4.innerText = 'Parler correctement français ou anglais et rester respectueux';
+        liRcmdL1.innerText = 'Avoir déjà réalisé des challenges ou des CTF';
+        liRcmdL2.innerText = 'Être familiarisé avec les outils d\'exploitation de failles (Kali Linux, Metasploit, ...)';
+        nextCTF.innerText = 'Prochain CTF';
+        partenariat.innerText = 'Contact pour partenariat : pro$erotium-primus,com ($ -> @) (, -> .)';
+        membreOrigine.innerText = 'Nos membres viennent de...';
+        question1.innerHTML = '<strong> Q: Je suis en étude d\'informatique mais je n\'y connais rien en termes de cybersécurité. Je peux rejoindre la Team ? </strong><br/> R: Oui, les expérimentés font des challenges en compagnie d\'autre experimentés et les débutants se font aider par les intermédiaires et experimentés.';
+        question2.innerHTML = '<strong> Q: Je ne suis pas en étude et je n\'ai jamais fais d\'études en informatique, puis-je rejoindre ? </strong><br/> R: Uniquement si vous avez niveau irréprochable dans le domaine de l\'informatique ou si vous allez commencer tant tôt votre formation dans le secteur.';
+        question3.innerHTML = '<strong> Q: J\'ai un bachelor / master en informatique, est-ce que je suis trop gradé pour ce club ? </strong><br/>R: Nous possèdons aussi des membres qui étudient en Université et en Haute Ecole Spécialisée. Vous trouverez des membres partageant votre niveau sans trop de difficultés.';
+        question4.innerHTML = '<strong> Q: Je n\'ai pas encore 16 ans, puis-je rejoindre ? </strong><br/>R: Non. Le manque de connaissance et surtout de sérieux des moins de 16 ans pose problème. Désolé.';
+        question5.innerHTML = '<strong> Q: Est-ce 100 % gratuit ? </strong><br/>R: Oui. L\'acces au serveur sera toujours gratuit.';
+        question6.innerHTML = '<strong> Q: L\'équipe n\'utilise t\'elle que Discord comme moyen de communication ? </strong><br/>R: Oui. (D\'autre projet sont en cours de discussion).';
+        question7p1.innerHTML = '<strong>Q: Quels profils de membres possèdez-vous actuellement ?</strong> <br/>R: Etudiants en informatique : <br>';
+        question7p2.innerHTML = '<br/> L\'équipe est composée de membres provenant de 3 continents. <br/>Nos membres sont agés entre 16 et 28 ans. <br/>Tout cela assure une grande diversification des connaissaces.';
+        question7ul.innerHTML = '<li> Université </li> <li> Haute école spécialisée </li> <li> apprentissage </li> <li> Lycée </li>';
+        if (!document.getElementById("heureSuisse")) {
+            document.getElementById("heureSuisse").innerHTML = "(Heure Suisse) <br> <br><a href='https://icalendrier.fr/outils/conversion-fuseaux?startDate=<?php echo $ctf_annee . '-' . $ctf_mois . '-' . $ctf_jour ?>&hours=<?php echo $ctf_heure ?>&minutes=<?php echo $ctf_minute ?>&baseTimezone=Europe%2FZurich' target='_blank'>Calculer le décalage horaire</a> <br> (une fois arrivé sur la page ne changez que la ville du fuseau horaire cible, le reste à déjà été prérempli)";
+        } else {
+            document.getElementById("demo").innerHTML = "À planifier";
+        }
+        btnSubmit.value = 'Valider';
+    }
+</script>
+
+<!-- Inititialisation des variables JS necessaire pour changer le Logo et cacher des élements -->
+<script>
+    let conteneurTexteEchecReussite = document.getElementsByClassName('conteneurTexteEchecReussite')[0];
+    let DivconteneurTexteEchecReussite = document.getElementsByClassName('Div_conteneurTexteEchecReussite')[0];
+    let cacher = document.getElementById('cacher');
+    let instructions = document.getElementsByClassName('instructions')[0];
+    let mainImage = document.getElementById('mainImage');
+    instructions.style.visibility = 'hidden';
+</script>
+
+<!-- Effet points reliés sur la page d'accueil -->
+<canvas class="particles"></canvas>
+<script src="particles.js-master/dist/particles.min.js"></script>
+<script>
+    var particles = Particles.init({
+        selector: '.particles',
+        color: ['#DA0463', '#404B69', '#DBEDF3'],
+        connectParticles: true,
+        responsive: [
+            {
+                breakpoint: 768,
+                options: {
+                    maxParticles: 200,
+                    connectParticles: false
+                }
+            },
+            {
+                breakpoint: 220,
+                options: {
+                    maxParticles: 0
+                }
+            }
+        ]
+    });
+
+    let canvasPart = document.getElementsByClassName('particles');
+    let divAccueil = document.getElementsByClassName('intro');
+
+    //canvasPart[0].width = divAccueil[0].clientWidth;
+    //canvasPart[0].height = divAccueil[0].clientHeight;
+</script>
+
+</body>
+</html>
