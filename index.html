@@ -1,5 +1,5 @@
 <!--
-Dernière modification : 21.10.2020
+Dernière modification : 14.06.2021
 
 Carte du monde : https://github.com/StephanWagner/svgMap
 Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/master/LICENSE
@@ -28,12 +28,6 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
     <!-- Barre suprérieure (insta, FB, ...) -->
     <div id="barre_haut">
 
-        <!-- Icon Facebook -->
-        <img id="icon_facebook" src="img/facebook.svg" alt="Facebook"/>
-
-        <!-- Icon Instagramm -->
-        <img id="icon_instagramm" src="img/instagram.svg" alt="instagram"/>
-
         <!-- Interrupteur -->
         <div id="interrupteur">
             <p class="btnperso" id="web">
@@ -60,7 +54,7 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
             <p id="equipeWhiteHatAxee">Équipe WhiteHat axée cybersécurité</p>
 
             <!-- PREMIER BOUTON REJOINDRE -->
-            <span><a class="btnRejoindre" href="#">Rejoindre le Discord</a></span>
+            <span><a class="btnRejoindre" href="#" onclick="adminClosed()">Rejoindre le Discord</a></span>
 
             <!-- GIF fleche vers le bas sur l'accueil -->
             <a href="#about"><img alt="fleche vers le bas" src="img/arrow.gif"
@@ -195,7 +189,7 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
 
             <!-- DEUXIEME BOUTON REJOINDRE -->
             <p style="text-align: center;"><a
-                        class="btnRejoindre" href="#">Rejoindre le Discord</a></p></div>
+                        class="btnRejoindre" href="#" onclick="adminClosed()">Rejoindre le Discord</a></p></div>
     </div>
 
     <!-- SECTION CARTE DU MONDE -->
@@ -469,6 +463,13 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
 
     //canvasPart[0].width = divAccueil[0].clientWidth;
     //canvasPart[0].height = divAccueil[0].clientHeight;
+</script>
+
+<!-- Admission temporairement fermées -->
+<script type="text/javascript">
+    function adminClosed(){
+        alert('Les admissions sont temporairement fermées. \nContact : projects@alexg.ch')
+    }
 </script>
 
 </body>
