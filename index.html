@@ -20,6 +20,10 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
     <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="google.css">
 
+    <link href="node_modules/svgmap/dist/svgMap.css" rel="stylesheet">
+    <script src="node_modules/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
+    <script src="node_modules/svgmap/dist/svgMap.js"></script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
 </head>
 <body>
@@ -193,8 +197,7 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
     </div>
 
     <!-- SECTION CARTE DU MONDE -->
-    <script src="map/dist/svgMap.min.js"></script>
-    <link href="map/dist/svgMap.min.css" rel="stylesheet"/>
+
     <div class="section carteDuMonde">
         <h2 id="membresViennentDe">Nos membres viennent de...</h2>
         <div class="carteDuMonde" id="svgMap">
@@ -212,7 +215,7 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
                             gdp: {
                                 name: 'Nombre de membres :',
                                 format: '{0}',
-                                thousandSeparator: ',',
+                                thousandSeparator: '\'',
                                 thresholdMax: 50000,
                                 thresholdMin: 1000
                             }
