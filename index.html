@@ -138,13 +138,13 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
     <div class="section qestionsFrequentes">
         <h2>Questions fréquentes</h2>
         <div><p id="Q1">
-                <strong>
-                    Q: Je suis en étude d'informatique mais je n'y connais rien en termes de cybersécurité. Je peux
-                    rejoindre la Team ?
-                </strong><br/>
-                R: Oui, les expérimentés font des challenges en compagnie d'autre experimentés et les débutants
-                se font aider par les intermédiaires et experimentés.
-            </p>
+            <strong>
+                Q: Je suis en étude d'informatique mais je n'y connais rien en termes de cybersécurité. Je peux
+                rejoindre la Team ?
+            </strong><br/>
+            R: Oui, les expérimentés font des challenges en compagnie d'autre experimentés et les débutants
+            se font aider par les intermédiaires et experimentés.
+        </p>
             <p id="Q2">
                 <strong>Q: Je ne suis pas en étude et je n'ai jamais fais d'études en informatique, puis-je rejoindre
                     ?</strong><br/>
@@ -189,7 +189,7 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
 
             <!-- DEUXIEME BOUTON REJOINDRE -->
             <p style="text-align: center;"><a
-                        class="btnRejoindre" href="#" onclick="adminClosed()">Rejoindre le Discord</a></p></div>
+                    class="btnRejoindre" href="#" onclick="adminClosed()">Rejoindre le Discord</a></p></div>
     </div>
 
     <!-- SECTION CARTE DU MONDE -->
@@ -461,9 +461,63 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
 </script>
 
 <!-- Effet points reliés sur la page d'accueil -->
-<canvas class="particles"></canvas>
-<script src="particles.js-master/dist/particles.min.js"></script>
+<script src="node_modules/tsparticles/tsparticles.min.js"></script>
+<div id="tsparticles" class="particles"></div>
 <script>
+
+    tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        particles: {
+            number: {
+                value: 70,
+                limit: 80
+            },
+            lineLinked: {
+                distance: 150,
+                enable: true,
+                color: {
+                    value: 'random'
+                }
+            },
+            move: {
+                enable: true,
+                speed: 0.7
+            },
+            size: {
+                value: 0.2
+            },
+            color: {
+                value: ['#DA0463', '#404B69', '#DBEDF3']
+            }
+        },
+        /* omissis, this is the main options object */
+        responsive: [{
+            maxWidth: 220,
+            options: {
+                particles: {
+                    number: {
+                        value: 0,
+                        limit: 0
+                    }
+                }
+            }
+        }, {
+            maxWidth: 768,
+            options: {
+                particles: {
+                    number: {
+                        value: 20,
+                        limit: 25
+                    },
+                    lineLinked: {
+                        enabled: false
+                    }
+                }
+            }
+        }]
+    });
+
+    /*
     var particles = Particles.init({
         selector: '.particles',
         color: ['#DA0463', '#404B69', '#DBEDF3'],
@@ -490,11 +544,14 @@ Licence de la carte du monde : https://github.com/StephanWagner/svgMap/blob/mast
 
     //canvasPart[0].width = divAccueil[0].clientWidth;
     //canvasPart[0].height = divAccueil[0].clientHeight;
+
+
+     */
 </script>
 
 <!-- Admission temporairement fermées -->
 <script type="text/javascript">
-    function adminClosed(){
+    function adminClosed() {
         alert('Les admissions sont temporairement fermées. \nContact : ep@alexg.ch')
     }
 </script>

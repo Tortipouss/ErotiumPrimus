@@ -392,9 +392,6 @@ p, h1, h2, h3, h4, h5, h6, li, input, span, label {
     color: white;
 }
 
-.fondParticules{
-    z-index: 3;
-}
 
 /* Téléphone */
 @media only screen and (min-width: 100px) {
@@ -604,6 +601,10 @@ input:checked + .slider:before {
     left: 0;
     z-index: 2;
     width: 100%;
+}
+
+.fondParticules{
+    z-index: 3;
 }
 
 .ssElemAPropos {
